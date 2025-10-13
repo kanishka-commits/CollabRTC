@@ -1,0 +1,7 @@
+Express
+Nodemon
+Mongoose
+Bcrypt
+http status
+Socket.io
+cors
