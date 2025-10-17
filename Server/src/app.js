@@ -6,6 +6,8 @@ import { connectToSocket } from "./controllers/socketManager.js";
 import mongoose from "mongoose";
 import cors from "cors";
 
+import userRoutes from "./routes/users.routes.js";
+
 
 const app=express();
 const server=createServer(app);
@@ -26,3 +28,5 @@ console.log(connectionDb.connection.host);
 server.listen(app.get("port"),()=>{
     console.log(`I'm listening to port ${port}`);
 })
+
+app.use("/api/v1/users", userRoutes);
