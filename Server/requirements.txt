@@ -5,3 +5,4 @@ Bcrypt
 http status
 Socket.io
 cors
+crypto
