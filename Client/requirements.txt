@@ -1,2 +1,6 @@
 react-router-dom
-npm install @mui/material @emotion/react @emotion/styled
+@mui/material @emotion/react @emotion/styled
+@mui/icons-material
+socket.io-client
+axios
+http-status
