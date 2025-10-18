@@ -4,6 +4,8 @@ import { connectToSocket } from "./controllers/socketManager.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./routes/users.routes.js";
+import httpStatus from "http-status";
+
 
 const app = express();
 const server = createServer(app);
@@ -15,11 +17,11 @@ app.use(cors());
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
-app.use("/api/v1/users", userRoutes);
+app.use("/api/v1", userRoutes);
 
 // MongoDB Compass URI (replace <username>, <password>, <dbname>)
 const MONGO_URI =
-    "mongodb+srv:// <username>:<password>@clusterrtc.488cknu.mongodb.net/";
+    "mongodb+srv://<username>:<password>@clusterrtc.488cknu.mongodb.net/";
 
 
 // Start server and connect to MongoDB
@@ -43,5 +45,9 @@ const startServer = async () => {
     console.error("❌ MongoDB connection error:", err);
   }
 };
+
+app.get("/", (req,res)=>{
+  res.status(httpStatus.FOUND).send("You're on Home page")
+})
 
 startServer();
