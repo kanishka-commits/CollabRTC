@@ -301,40 +301,30 @@ export default function VideoMeetComponent() {
 
                     // Wait for their video stream
                     connections[socketListId].onaddstream = (event) => {
-                        console.log("BEFORE:", videoRef.current);
-                        console.log("FINDING ID: ", socketListId);
+                        
+                        setVideos(prevVideos => {
+                            // 1. Check if the video already exists in the *previous state*
+                            const videoExists = prevVideos.find(video => video.socketId === socketListId);
 
-                        let videoExists = videoRef.current.find(video => video.socketId === socketListId);
-
-                        if (videoExists) {
-                            console.log("FOUND EXISTING");
-
-                            // Update the stream of the existing video
-                            setVideos(videos => {
-                                const updatedVideos = videos.map(video =>
-                                    video.socketId === socketListId ? { ...video, stream: event.stream } : video
+                            if (videoExists) {
+                                // 2. If it exists, map the state and update the stream
+                                return prevVideos.map(video =>
+                                    video.socketId === socketListId
+                                        ? { ...video, stream: event.stream } // Update the stream
+                                        : video
                                 );
-                                videoRef.current = updatedVideos;
-                                return updatedVideos;
-                            });
-                        } else {
-                            // Create a new video
-                            console.log("CREATING NEW");
-                            let newVideo = {
-                                socketId: socketListId,
-                                stream: event.stream,
-                                autoplay: true,
-                                playsinline: true
-                            };
-
-                            setVideos(videos => {
-                                const updatedVideos = [...videos, newVideo];
-                                videoRef.current = updatedVideos;
-                                return updatedVideos;
-                            });
-                        }
+                            } else {
+                                // 3. If it doesn't exist, add the new video to the state
+                                const newVideo = {
+                                    socketId: socketListId,
+                                    stream: event.stream,
+                                    autoplay: true,
+                                    playsinline: true
+                                };
+                                return [...prevVideos, newVideo];
+                            }
+                        });
                     };
-
 
                     // Add the local video stream
                     if (window.localStream !== undefined && window.localStream !== null) {
