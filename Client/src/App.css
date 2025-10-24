@@ -1,19 +1,24 @@
+/* --- Landing Page --- */
+
 .landingPageContainer {
   width: 100vw;
   height: 100vh;
-  background: url("/public/background.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: white;
+  /* ==== CHANGE: Replace image with CSS gradient ==== */
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Example Purple/Blue Gradient */
+  /* Or a more subtle one: */
+  /* background: linear-gradient(to right, #ece9e6, #ffffff); */
+  color: white; /* Keep text white for dark gradient */
+  display: flex;
+  flex-direction: column;
 }
 
+/* Navigation styles remain similar, adjust padding/colors if needed */
 .landingPageContainer nav {
-  padding-inline: 1.2rem;
-  padding-block: 1.6rem;
+  padding: 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .landingPageContainer nav h2 {
@@ -23,74 +28,184 @@
 
 .landingPageContainer nav .navlist {
   display: flex;
-  gap: 1.6rem;
-  cursor: pointer;
-
-}
-
-.landingMainContainer {
-  display: flex;
-  justify-content: space-between;
-  padding-inline: 3rem;
-  height: 80vh;
+  gap: 2rem;
   align-items: center;
 }
 
-.landingMainContainer>div:nth-child(1) {
-  font-size: 2.2rem;
+.landingPageContainer nav .navlist p,
+.landingPageContainer nav .navlist div[role='button'] p {
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease-in-out;
 }
-
-.landingMainContainer>div:nth-child(1) div[role='button'] {
-  background: #D97500;
-  width: fit-content;
-  padding: 1rem;
-  border-radius: 20px;
-  margin-top: 1.9rem;
+.landingPageContainer nav .navlist p:hover {
+  color: #FFDAB9;
 }
-
-.landingMainContainer>div:nth-child(1) div[role='button'] a {
-  text-decoration: none;
+.landingPageContainer nav .navlist div[role='button'] { /* Login Button Style */
+  background: #FF9839;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+.landingPageContainer nav .navlist div[role='button']:hover {
+  background: #e08000;
+}
+.landingPageContainer nav .navlist div[role='button'] p {
   color: white;
-  font-size: 1.7rem;
+  font-weight: 700;
 }
 
-.landingMainContainer>div:nth-child(2) img {
-  height: 70vh;
+
+/* Main content area - now centers text content */
+.landingMainContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* ==== CHANGE: Center content horizontally ==== */
+  align-items: center;
+  text-align: center; /* Center text within its container */
+  padding: 3rem 5rem;
+}
+
+.landingMainContainer > div:nth-child(1) { /* Text content container */
+  max-width: 600px; /* Adjust max-width as needed */
+}
+
+.landingMainContainer > div:nth-child(1) h1 {
+  font-size: 3.5rem; /* Larger heading */
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.landingMainContainer > div:nth-child(1) h1 span { /* Connect span */
+  color: #FFD700; /* Gold color for contrast, replacing inline style */
+}
+
+.landingMainContainer > div:nth-child(1) p {
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.landingMainContainer > div:nth-child(1) div[role='button'] { /* Get Started Button */
+  background: white;
+  width: fit-content;
+  padding: 0.8rem 2rem; /* Adjusted padding */
+  border-radius: 8px;
+  margin: 1.9rem auto 0 auto; /* Center button */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.landingMainContainer > div:nth-child(1) div[role='button']:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.landingMainContainer > div:nth-child(1) div[role='button'] a {
+  text-decoration: none;
+  color: #6a11cb; /* Button text color matching gradient */
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ==== REMOVE or COMMENT OUT: Image container styles if image is removed ==== */
+/* .landingMainContainer > div:nth-child(2) img {
+  max-height: 60vh;
   width: auto;
-}
+  object-fit: contain;
+} */
 
+
+
+/* --- Home Page --- */
+
+/* NavBar styles remain similar, adjust padding/colors if needed */
 .navBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 20px;
-  text-align: center;
-
+  padding: 1rem 3rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
+.navBar h2 {
+    color: #6a11cb; /* Use primary color from landing gradient */
+}
+.navBar p {
+    margin-inline: 0.5rem;
+    color: #555;
+}
+.navBar .MuiIconButton-root {
+    color: #6a11cb;
+}
+.navBar .MuiButton-root { /* Logout Button */
+    color: #dc3545 !important;
+    text-transform: none !important;
+    font-weight: 700 !important;
+}
+
+/* Main meet container */
 .meetContainer {
   display: flex;
-  padding-inline: 20px;
-  height: 80vh;
-  gap: 10vw;
-  justify-content: center;
+  padding: 3rem 5rem; /* Increased padding */
+  min-height: calc(80vh - 4rem);
+  justify-content: center; /* ==== CHANGE: Center the single panel ==== */
+  align-items: center;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 900px; /* Adjust width since it's single column now */
+  margin: 0 auto;
+  text-align: center; /* Center text */
 }
-
-
 
 .leftPanel {
-  height: 100%;
-  display: flex;
-  align-items: center;
-
+  /* No specific styles needed if it's the only centered item */
+  padding: 0; /* Remove padding if centering */
 }
 
-.rightPanel {
-  display: flex;
-  align-items: center;
+.leftPanel h2 {
+  font-size: 2.2rem; /* Slightly larger */
+  margin-bottom: 2rem; /* More space */
+  line-height: 1.3;
+  color: #333;
 }
 
-.rightPanel > img {
-  width: 30vw;
+.leftPanel > div > div { /* Container for input and button */
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center; /* Center input/button */
+}
+
+/* ==== REMOVE or COMMENT OUT: Right panel styles if image is removed ==== */
+/* .rightPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+} */
+/* .rightPanel > img {
+  max-width: 100%;
   height: auto;
-  border-radius: 20px;
+  max-height: 50vh;
+  border-radius: 12px;
+} */
+
+/* ==== ALTERNATIVE for Right Panel: CSS Pattern ==== */
+/*
+.rightPanel {
+  flex: 1;
+  background-color: #f0f0f0; // Light background for pattern
+  background-image:
+    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  border-radius: 12px;
+  min-height: 300px; // Ensure it has some height
 }
+*/
+
