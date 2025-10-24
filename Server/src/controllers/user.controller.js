@@ -14,13 +14,20 @@ const login=async(req,res)=>{
         if(!user){
             return res.send(httpStatus.NOT_FOUND).json({message:"User Not Found!"});
         }
-        if(bcrypt.compare(password,user.password)){
-            let token=crypto.randomBytes(20).toString("hex");
-            console.log("user is",user[0]);
-            user.token=token;
+        // Add 'await' before bcrypt.compare
+        if (await bcrypt.compare(password, user.password)) {
+            let token = crypto.randomBytes(20).toString("hex");
+            
+            // Minor fix: user is an object, not an array
+            console.log("user is", user); 
+            
+            user.token = token;
             await user.save();
-              
-            return res.status(httpStatus.OK).json({token:token })
+
+            return res.status(httpStatus.OK).json({ token: token })
+        } else {
+            // You should also add an 'else' block for wrong passwords
+            return res.status(httpStatus.UNAUTHORIZED).json({ message: "Invalid username or password" });
         }
     }catch(e){ 
         return res.status(500).json({message:`Something went wrong ${e} `})
